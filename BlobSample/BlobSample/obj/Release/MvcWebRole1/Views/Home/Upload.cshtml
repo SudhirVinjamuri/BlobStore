@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+<p>
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <h3>Use below input box for small files</h3>
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" />
+    }
+</p>
+<br />
+
+<ul>
+    @foreach (var item in Model)
+    {
+        <li>
+            <!--<img src="@item.Key" alt="file here" width="100" height="100" /> 
+                Uncomment for previewing a file. But will take time to load page with large files --> 
+            <a id="@item">@item.Value</a>
+            <a id="@item" href='@item.Key' download='@item.Key'>Download</a>
+            <a id="@item" href="#" onclick="deleteFile('@item.Key');">Delete</a>
+        </li>
+    }
+</ul>
+
+<script>
+    function deleteFile(item) {
+        var url = "/Home/DeleteFile";
+        $.post(url, { Name: item }, function (data) {
+            window.location.href = "/Home/Upload";
+        });
+    }
+</script>
+

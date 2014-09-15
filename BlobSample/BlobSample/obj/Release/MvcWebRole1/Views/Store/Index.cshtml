@@ -1,0 +1,35 @@
+﻿@model MvcWebRole1.Models.CloudFilesModel
+@{
+    ViewBag.Title = "File List";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+        </div>
+    </section>
+}
+<h3>Current Files</h3>
+<ul>
+    @foreach (var item in Model.Files)
+    {
+        <li>
+            <a href="@item.URL">@item.FileName</a> (@item.Size bytes)
+            <a id="@item" href='@item.URL.ToString()' download='@item.URL.ToString()'>Download</a>
+            <a id="@item" href="#" onclick="deleteFile('@item.URL.ToString()');">Delete</a>
+        </li>
+    }
+</ul>
+@Html.ActionLink("Upload Another File", "UploadFile")
+
+<script>
+    function deleteFile(item) {
+        var url = "/Store/DeleteFile";
+        $.post(url, { Name: item }, function (data) {
+            window.location.href = "/Store";
+        });
+    }
+</script>

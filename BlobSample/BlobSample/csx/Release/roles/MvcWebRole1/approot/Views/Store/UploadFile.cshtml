@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "UploadFile";
+}
+
+<h1>Upload BIG File to Azure Blob Storage</h1>
+
+<input type="file" id="selectFile" name="selectFile" />
+<input type="submit" name="fileUpload" id="fileUpload" value="Upload" />
+<br />
+<div id="progressBar" style="width:50%; height:20px; background-color:grey"></div>
+<br />
+<label id="statusMessage"></label>
+
+@Html.ActionLink("Back to Files List", "Index")
+
+@section Scripts{
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <script src="~/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="~/Scripts/chunked-uploader.js"></script>
+}
